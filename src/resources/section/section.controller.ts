@@ -17,6 +17,8 @@ const createSection = async (req, res) => {
   }
 };
 const getSections = async (req, res) => {
+  const { query } = req;
+  console.log(query);
   try {
     const sections: (typeof Section)[] = await Section.find();
     res.status(200).json({ message: "Data loaded", data: sections });

@@ -12,11 +12,7 @@ app.get("/", (req, res) => {
   res.send(`<h2>Blogger Application</h2>`);
 });
 
-//
-
+// use routes
 app.use("/api/v1/sections", sections);
-app.get("/api/v1", (req, res) => {
-  console.log("hello");
-});
 
 export default app;
