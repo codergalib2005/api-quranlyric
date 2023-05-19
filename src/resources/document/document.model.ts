@@ -5,8 +5,6 @@ interface IDocument extends Document {
   content: string;
   category: string;
   tags: string[];
-  createdAt: Date;
-  updatedAt: Date;
 }
 
 const documentSchema: Schema = new Schema(
