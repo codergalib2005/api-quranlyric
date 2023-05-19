@@ -7,11 +7,12 @@ import Doc from "./document.model";
 
 export const createDoc = async (req, res) => {
   try {
-    const { title, content, category } = req.body;
+    const { title, content, category, topic } = req.body;
     const newDoc = new Doc({
       title,
       content,
       category,
+      topic,
     });
     const saveDoc = await newDoc.save();
     res.status(201).json({ message: "Document Added success", data: saveDoc });

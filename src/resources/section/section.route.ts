@@ -5,6 +5,7 @@ import {
   getSections,
   getASection,
   deleteASection,
+  newDoc,
 } from "./section.controller";
 const router = express.Router();
 
@@ -17,5 +18,7 @@ router
   .get(getASection)
   .patch(updateASection)
   .delete(deleteASection);
+
+router.put("/newDoc", newDoc);
 
 export default router;
