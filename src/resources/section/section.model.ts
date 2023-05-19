@@ -2,7 +2,7 @@ import mongoose, { Schema, Document } from "mongoose";
 
 interface ISection extends Document {
   name: string;
-  likes: string[];
+  likes: [];
   order: number;
   documents: mongoose.Types.ObjectId[];
   topic: string;
@@ -13,9 +13,6 @@ const SectionSchema: Schema = new Schema(
     name: {
       required: true,
       type: String,
-    },
-    likes: {
-      type: [String],
     },
     order: {
       required: true,
