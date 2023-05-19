@@ -37,6 +37,6 @@ const SectionSchema: Schema = new Schema(
   }
 );
 
-const Section = mongoose.model<ISection>("Section", SectionSchema);
+const Section = mongoose.model("Section", SectionSchema);
 
 export default Section;
