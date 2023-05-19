@@ -5,7 +5,7 @@ interface ISection extends Document {
   likes: string[];
   order: number;
   documents: mongoose.Types.ObjectId[];
-  topic : string;
+  topic: string;
 }
 
 const SectionSchema: Schema = new Schema(
@@ -28,15 +28,15 @@ const SectionSchema: Schema = new Schema(
       },
     ],
     topic: {
-        required: true,
-        type: String,
-    }
+      required: true,
+      type: String,
+    },
   },
   {
     timestamps: true,
   }
 );
 
-const Section = mongoose.model("Section", SectionSchema);
+const Section = mongoose.model<ISection>("Section", SectionSchema);
 
 export default Section;
