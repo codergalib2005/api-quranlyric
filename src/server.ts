@@ -20,4 +20,6 @@ app.get("/", (req, res) => {
 // use routes
 app.use("/api/v1/sections", sections);
 app.use("/api/v1/doc", doc);
+
+
 export default app;
