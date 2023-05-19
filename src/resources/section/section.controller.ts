@@ -1,15 +1,30 @@
-const createSection = (req, res) => {
+import Section from "./section.model";
+
+const createSection = async (req, res) => {
   try {
-    const { name, order } = req.body;
-    if (name || order) {
-      return res.status(404).json({ message: "All field are required!" });
-    }
+    const { name, order, topic } = req.body;
+
+    const newSection = new Section({
+      name,
+      order,
+      topic,
+    });
+
+    const saveSection = await newSection.save();
+    res.status(201).json({ message: "Section created", data: saveSection });
   } catch (err) {
-    res.status(402).json({ message: "Server error" });
+    res.status(500).json({ error: "Failed to create section" });
+  }
+};
+const getSections = async (req, res) => {
+  try {
+    const sections: (typeof Section)[] = await Section.find();
+    res.status(200).json({ message: "Data loaded", data: sections });
+  } catch (err) {
+    res.status(500).json({ error: "Faild to retrive sections" });
   }
 };
 const getASection = (req, res) => {};
-const getSections = (req, res) => {};
 const updateASection = (req, res) => {};
 const deleteASection = (req, res) => {};
 
