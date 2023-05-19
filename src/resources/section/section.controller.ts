@@ -13,17 +13,19 @@ const createSection = async (req, res) => {
     const saveSection = await newSection.save();
     res.status(201).json({ message: "Section created", data: saveSection });
   } catch (err) {
-    res.status(500).json({ error: "Failed to create section" });
+    console.log(err);
+    res.status(500).json({ error: "Failed to create section", err });
   }
 };
 const getSections = async (req, res) => {
   try {
-    const sections: (typeof Section)[] = await Section.find();
+    const sections = await Section.find();
     res.status(200).json({ message: "Data loaded", data: sections });
   } catch (err) {
-    res.status(500).json({ error: "Faild to retrive sections" });
+    res.status(500).json({ error: "Failed to retrieve sections", err });
   }
 };
+
 const getASection = (req, res) => {};
 const updateASection = (req, res) => {};
 const deleteASection = (req, res) => {};
