@@ -20,5 +20,11 @@ const SectionSchema: Schema = new Schema(
       type: Number,
     },
   },
-  {}
+  {
+    timestamps: true,
+  }
 );
+
+const Section = mongoose.model<ISection>("Section", SectionSchema);
+
+export default Section;
