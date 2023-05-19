@@ -19,9 +19,8 @@ const createSection = async (req, res) => {
 };
 const getSections = async (req, res) => {
   try {
-    console.dir(Section);
     const sections = await Section.find();
-    // res.status(200).json({ message: "Data loaded", data: sections });
+    res.status(200).json({ message: "Data loaded", data: sections });
   } catch (err) {
     res.status(500).json({ error: "Failed to retrieve sections", err });
   }
