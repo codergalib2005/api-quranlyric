@@ -4,7 +4,7 @@ interface ISection extends Document {
   name: string;
   likes: [];
   order: number;
-  documents: string[]; // mongoose.Types.ObjectId[];
+  documents: mongoose.Types.ObjectId[];
   topic: string;
 }
 
@@ -18,9 +18,12 @@ const SectionSchema: Schema = new Schema(
       required: true,
       type: Number,
     },
-    documents: {
-      type: [String],
-    },
+    documents: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Doc",
+      },
+    ],
     topic: {
       required: true,
       type: String,
