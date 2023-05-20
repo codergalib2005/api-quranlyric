@@ -19,7 +19,9 @@ export const createSection = async (req, res) => {
 };
 export const getSections = async (req, res) => {
   try {
-    const sections = await Section.find().populate("documents").select('title');
+    const sections = await Section.find()
+      .populate("documents")
+      .exec();
     res.status(200).json({ message: "Data loaded", data: sections });
   } catch (err) {
     res.status(500).json({ error: "Failed to retrieve sections", err });
