@@ -22,6 +22,9 @@ const documentSchema: Schema = new Schema(
       required: true,
     },
     tags: [{ type: String }],
+    slug: {
+      type: String,
+    },
   },
   {
     timestamps: true,

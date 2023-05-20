@@ -1,13 +1,18 @@
+import slug from "../../utils/slug";
 import Section from "./section.model";
 
 export const createSection = async (req, res) => {
   try {
     const { name, order, topic } = req.body;
 
+    const count = await Section.countDocuments();
+    const makeSlug = `${count + 1}-${slug(name)}`;
+
     const newSection = new Section({
       name,
       order,
       topic,
+      slug: makeSlug,
     });
 
     const saveSection = await newSection.save();
@@ -20,7 +25,7 @@ export const createSection = async (req, res) => {
 export const getSections = async (req, res) => {
   try {
     const sections = await Section.find()
-      .populate("documents", "title content")
+      .populate("documents", "title content slug -_id")
       .exec();
     res.status(200).json({ message: "Data loaded", data: sections });
   } catch (err) {

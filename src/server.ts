@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import connectDB from "./connect/connectDB";
 const app = express();
-//
+// 
 import sections from "./resources/section/section.route";
 import doc from "./resources/document/document.route";
 

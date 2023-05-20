@@ -28,6 +28,9 @@ const SectionSchema: Schema = new Schema(
       required: true,
       type: String,
     },
+    slug: {
+      type: String,
+    },
   },
   {
     timestamps: true,
