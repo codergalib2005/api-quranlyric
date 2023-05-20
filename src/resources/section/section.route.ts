@@ -19,6 +19,6 @@ router
   .patch(updateASection)
   .delete(deleteASection);
 
-router.put("/newDoc", newDoc);
+router.put("/addDoc", newDoc);
 
 export default router;
