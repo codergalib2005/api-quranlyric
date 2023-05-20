@@ -20,7 +20,7 @@ export const createSection = async (req, res) => {
 export const getSections = async (req, res) => {
   try {
     const sections = await Section.find()
-      .populate("documents")
+      .populate("documents", "title content")
       .exec();
     res.status(200).json({ message: "Data loaded", data: sections });
   } catch (err) {
