@@ -38,10 +38,8 @@ export const newDoc = async (req, res) => {
       return res.status(404).json({ message: "Section not found" });
     }
     section.documents.push(docId);
-    const updateSection = await section.save();
-    console.log(updateSection);
-    // const update = section.docum
-    // res.status(200).json({ message: "added", data: update });
+    const updatedSection = await section.save();
+    res.status(201).json({ message: "Updated section", data: updatedSection });
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Server error", err });
