@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // main page
 app.get("/", (req, res) => {
-  res.send(`<h2>Blogger Application</h2>`);
+  res.status(200).send("Hello, World!");
 });
 
 // use routes
