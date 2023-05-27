@@ -1,15 +1,17 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 interface IDocument extends Document {
-  title: string;
+  name: string;
   content: string;
   category: string;
   tags: string[];
+  meta_title: string;
+  meta_description: string;
 }
 
 const documentSchema: Schema = new Schema(
   {
-    title: {
+    name: {
       type: String,
       required: true,
     },
@@ -23,6 +25,14 @@ const documentSchema: Schema = new Schema(
     },
     tags: [{ type: String }],
     slug: {
+      type: String,
+    },
+    meta_title: {
+      require: true,
+      type: String,
+    },
+    meta_description: {
+      required: true,
       type: String,
     },
   },
