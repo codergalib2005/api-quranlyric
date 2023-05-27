@@ -1,14 +1,15 @@
 import mongoose from "mongoose";
 
-const connectDB = () => {
-  try {
+const connectDB = (): Promise<void> => {
+  return new Promise<void>((resolve, reject) => {
     mongoose
       .connect(process.env.MONGO_URI)
-      .then(() => console.log("Database connected"))
-      .catch((err) => console.log(err));
-  } catch (err) {
-    console.log(err);
-  }
+      .then(() => {
+        resolve();
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
 };
-
 export default connectDB;
