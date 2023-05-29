@@ -18,6 +18,12 @@ cat server.ts
 exit
 ```
 
+### Rebulid the image
+```shell
+docker compose -f docker-compose.dev.yml up --build
+```
+
+
 ```shell
 
 ```
