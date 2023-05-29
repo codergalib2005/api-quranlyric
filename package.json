@@ -6,7 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "test": "jest",
-    "dev": "ts-node-dev src/index",
+    "dev": "ts-node-dev --poll src/index",
     "build": "rimraf ./dist && tsc",
     "start": "npm run build && node dist/index.js"
   },
