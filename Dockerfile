@@ -1,9 +1,3 @@
-FROM node:alpine
+FROM node:18-alpine
 
-
-COPY . /app
-
-
-WORKDIR /app
-
-CMD node app.js
+WORKDIR /usr/src/app
