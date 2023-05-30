@@ -3,7 +3,7 @@
 // category: string;
 // tags: string[];
 
-import counter from "utils/counter";
+import counter from "../../utils/counter";
 import slug from "../../utils/slug";
 import Doc from "./document.model";
 
@@ -12,7 +12,6 @@ export const createDoc = async (req, res) => {
     const {
       name,
       content,
-      category,
       topic,
       meta_title,
       meta_description,
@@ -25,7 +24,6 @@ export const createDoc = async (req, res) => {
     const newDoc = new Doc({
       name,
       content,
-      category,
       topic,
       slug: makeSlug,
       meta_title,

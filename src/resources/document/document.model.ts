@@ -3,7 +3,6 @@ import mongoose, { Schema, Document } from "mongoose";
 interface IDocument extends Document {
   name: string;
   content: string;
-  category: string;
   tags: string[];
   meta_title: string;
   meta_description: string;
@@ -17,10 +16,6 @@ const documentSchema: Schema = new Schema(
       required: true,
     },
     content: {
-      type: String,
-      required: true,
-    },
-    category: {
       type: String,
       required: true,
     },
