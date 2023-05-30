@@ -12,7 +12,6 @@ export const createDoc = async (req, res) => {
     const {
       name,
       content,
-      category,
       topic,
       meta_title,
       meta_description,
@@ -25,7 +24,6 @@ export const createDoc = async (req, res) => {
     const newDoc = new Doc({
       name,
       content,
-      category,
       topic,
       slug: makeSlug,
       meta_title,
