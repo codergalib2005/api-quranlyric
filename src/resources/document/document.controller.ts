@@ -3,7 +3,7 @@
 // category: string;
 // tags: string[];
 
-import counter from "utils/counter";
+import counter from "../../utils/counter";
 import slug from "../../utils/slug";
 import Doc from "./document.model";
 
