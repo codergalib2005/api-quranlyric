@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 dotenv.config();
 import connectDB from "./connect/connectDB";
 const app = express();
@@ -11,7 +12,7 @@ import doc from "./resources/document/document.route";
 connectDB();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(cors());
 // main page
 app.get("/", (req, res) => {
   res.status(200).send("Hello, World!");
