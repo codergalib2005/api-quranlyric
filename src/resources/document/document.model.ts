@@ -7,6 +7,7 @@ interface IDocument extends Document {
   tags: string[];
   meta_title: string;
   meta_description: string;
+  meta_keywords: string;
 }
 
 const documentSchema: Schema = new Schema(
@@ -34,6 +35,10 @@ const documentSchema: Schema = new Schema(
     meta_description: {
       required: true,
       type: String,
+    },
+    meta_keywords: {
+      type: String,
+      required: true,
     },
   },
   {
