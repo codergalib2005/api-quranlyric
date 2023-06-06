@@ -37,13 +37,63 @@ export const createDoc = async (req, res) => {
   }
 };
 export const getDocs = async (req, res) => {
+  let { lang } = req.query || {};
+
+  // Convert lang to lowercase if it exists
+  lang = lang ? lang.toLowerCase() : undefined;
+
   try {
-    const docs = await Doc.find();
+    let query = {};
+
+    // Add topic query if lang is provided
+    if (lang) {
+      (query as any).topic = { $regex: lang, $options: "i" };
+    }
+
+    const docs = await Doc.find(query);
     res.status(200).json({ message: "docs loaded", data: docs });
   } catch (err) {
     res.status(500).json({ message: "That was server error" });
   }
 };
-export const getADoc = async (req, res) => {};
-export const updateDoc = async (req, res) => {};
-export const deleteDoc = async (req, res) => {};
+export const getADoc = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const doc = await Doc.findById(id);
+
+    if (!doc) {
+      return res.status(404).json({ message: "Document not found" });
+    }
+    res.status(200).json({ data: doc, msg: "Loaded" });
+  } catch (err) {
+    res.status(403).json({ msg: "server error" });
+  }
+};
+export const updateDoc = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const doc = await Doc.findOneAndUpdate({ _id: id }, req.body, {
+      new: true,
+    });
+
+    if (!doc) {
+      return res.status(404).json({ message: "Document not found" });
+    }
+    res.status(201).json({ message: "Updated" });
+  } catch (err) {
+    res.status(403).json({ message: "Server error" });
+  }
+};
+export const deleteDoc = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deletedData = await Doc.findOneAndDelete({ _id: id });
+    if (!deletedData) {
+      return res.status(404).json({ msg: "Data not found" });
+    }
+    res.status(200).json({ msg: "Data deleted", data: deletedData });
+  } catch (err) {
+    res.status(201).json({ msg: "Server error" });
+  }
+};
