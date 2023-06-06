@@ -37,9 +37,20 @@ export const createDoc = async (req, res) => {
   }
 };
 export const getDocs = async (req, res) => {
-  const { lang } = req.query || {};
+  let { lang } = req.query || {};
+
+  // Convert lang to lowercase if it exists
+  lang = lang ? lang.toLowerCase() : undefined;
+
   try {
-    const docs = await Doc.find();
+    let query = {};
+
+    // Add topic query if lang is provided
+    if (lang) {
+      (query as any).topic = { $regex: lang, $options: "i" };
+    }
+
+    const docs = await Doc.find(query);
     res.status(200).json({ message: "docs loaded", data: docs });
   } catch (err) {
     res.status(500).json({ message: "That was server error" });
