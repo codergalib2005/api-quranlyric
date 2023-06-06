@@ -85,4 +85,15 @@ export const updateDoc = async (req, res) => {
     res.status(403).json({ message: "Server error" });
   }
 };
-export const deleteDoc = async (req, res) => {};
+export const deleteDoc = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deletedData = await Doc.findOneAndDelete({ _id: id });
+    if (!deletedData) {
+      return res.status(404).json({ msg: "Data not found" });
+    }
+    res.status(200).json({ msg: "Data deleted", data: deletedData });
+  } catch (err) {
+    res.status(201).json({ msg: "Server error" });
+  }
+};
