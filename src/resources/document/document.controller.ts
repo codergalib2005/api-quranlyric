@@ -56,6 +56,33 @@ export const getDocs = async (req, res) => {
     res.status(500).json({ message: "That was server error" });
   }
 };
-export const getADoc = async (req, res) => {};
-export const updateDoc = async (req, res) => {};
+export const getADoc = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const doc = await Doc.findById(id);
+
+    if (!doc) {
+      return res.status(404).json({ message: "Document not found" });
+    }
+    res.status(200).json({ data: doc, msg: "Loaded" });
+  } catch (err) {
+    res.status(403).json({ msg: "server error" });
+  }
+};
+export const updateDoc = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const doc = await Doc.findOneAndUpdate({ _id: id }, req.body, {
+      new: true,
+    });
+
+    if (!doc) {
+      return res.status(404).json({ message: "Document not found" });
+    }
+    res.status(201).json({ message: "Updated" });
+  } catch (err) {
+    res.status(403).json({ message: "Server error" });
+  }
+};
 export const deleteDoc = async (req, res) => {};
