@@ -37,6 +37,7 @@ export const createDoc = async (req, res) => {
   }
 };
 export const getDocs = async (req, res) => {
+  const { lang } = req.query || {};
   try {
     const docs = await Doc.find();
     res.status(200).json({ message: "docs loaded", data: docs });

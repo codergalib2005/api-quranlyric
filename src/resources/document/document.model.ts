@@ -35,6 +35,10 @@ const documentSchema: Schema = new Schema(
       type: String,
       required: true,
     },
+    topic: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
