@@ -103,7 +103,10 @@ export const getBySlug = async (req, res) => {
   const { slug } = req.params;
   try {
     const findDoc = await Doc.findOne({ slug });
-    console.log(findDoc);
+    if (!findDoc) {
+      return res.status(404).json({ msg: "Document not found" });
+    }
+    res.status(200).json({ msg: "Document find", data: findDoc });
   } catch (err) {
     res.status(403).json({ msg: "Server error", err });
   }
