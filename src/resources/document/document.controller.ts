@@ -16,6 +16,7 @@ export const createDoc = async (req, res) => {
       meta_title,
       meta_description,
       meta_keywords,
+      order,
     } = req.body;
 
     const count = await Doc.countDocuments();
@@ -29,6 +30,7 @@ export const createDoc = async (req, res) => {
       meta_title,
       meta_description,
       meta_keywords,
+      order,
     });
     const saveDoc = await newDoc.save();
     res.status(201).json({ message: "Document Added success", data: saveDoc });
