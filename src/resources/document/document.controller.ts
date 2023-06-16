@@ -99,3 +99,12 @@ export const deleteDoc = async (req, res) => {
     res.status(201).json({ msg: "Server error" });
   }
 };
+export const getBySlug = async (req, res) => {
+  const { slug } = req.params;
+  try {
+    const findDoc = await Doc.findOne({ slug });
+    console.log(findDoc);
+  } catch (err) {
+    res.status(403).json({ msg: "Server error", err });
+  }
+};
