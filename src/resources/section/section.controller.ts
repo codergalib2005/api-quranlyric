@@ -5,7 +5,7 @@ export const createSection = async (req, res) => {
   try {
     const { name, order, topic } = req.body;
 
-    const count = await Section.countDocuments();
+    const count = await Section.countDocuments({ topic: topic.toLowerCase() });
     const makeSlug = `${count + 1}-${slug(name)}`;
 
     const newSection = new Section({
