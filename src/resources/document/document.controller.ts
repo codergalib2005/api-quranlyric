@@ -16,6 +16,7 @@ export const createDoc = async (req, res) => {
       meta_title,
       meta_description,
       meta_keywords,
+      order,
     } = req.body;
 
     const count = await Doc.countDocuments();
@@ -29,6 +30,7 @@ export const createDoc = async (req, res) => {
       meta_title,
       meta_description,
       meta_keywords,
+      order,
     });
     const saveDoc = await newDoc.save();
     res.status(201).json({ message: "Document Added success", data: saveDoc });
@@ -95,5 +97,17 @@ export const deleteDoc = async (req, res) => {
     res.status(200).json({ msg: "Data deleted", data: deletedData });
   } catch (err) {
     res.status(201).json({ msg: "Server error" });
+  }
+};
+export const getBySlug = async (req, res) => {
+  const { slug } = req.params;
+  try {
+    const findDoc = await Doc.findOne({ slug });
+    if (!findDoc) {
+      return res.status(404).json({ msg: "Document not found" });
+    }
+    res.status(200).json({ msg: "Document find", data: findDoc });
+  } catch (err) {
+    res.status(403).json({ msg: "Server error", err });
   }
 };

@@ -5,7 +5,7 @@ export const createSection = async (req, res) => {
   try {
     const { name, order, topic } = req.body;
 
-    const count = await Section.countDocuments();
+    const count = await Section.countDocuments({ topic: topic.toLowerCase() });
     const makeSlug = `${count + 1}-${slug(name)}`;
 
     const newSection = new Section({
@@ -36,10 +36,14 @@ export const getSections = async (req, res) => {
       (query as any).topic = { $regex: lang, $options: "i" };
     }
 
+    const countDoc = await Section.countDocuments(query);
+
     const sections = await Section.find(query)
       .populate("documents", "title content slug -_id")
       .exec();
-    res.status(200).json({ message: "Data loaded", data: sections });
+    res
+      .status(200)
+      .json({ message: "Data loaded", data: sections, count: countDoc });
   } catch (err) {
     res.status(500).json({ error: "Failed to retrieve sections", err });
   }

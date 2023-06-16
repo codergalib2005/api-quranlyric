@@ -31,6 +31,10 @@ const SectionSchema: Schema = new Schema(
     slug: {
       type: String,
     },
+    isActive: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
