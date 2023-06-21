@@ -21,6 +21,7 @@ const documentSchema: Schema = new Schema(
     },
     tags: [{ type: String }],
     slug: {
+      required: true,
       type: String,
     },
     meta_title: {
@@ -37,10 +38,6 @@ const documentSchema: Schema = new Schema(
     },
     topic: {
       type: String,
-      required: true,
-    },
-    order: {
-      type: Number,
       required: true,
     },
   },
