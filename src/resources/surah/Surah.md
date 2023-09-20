@@ -1,4 +1,4 @@
-## Model creation and destruction functions for the database connection object created by the database connection object
+## Document for surah controll, model, and routes, that can help you understant with the surah route in development and production both
 
 **You can use this url, if you just want to load this surah with all verses, with translation to english**
 
