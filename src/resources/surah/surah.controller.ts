@@ -3,7 +3,9 @@ import Surah from "./surah.model";
 const getAllSurah = async (req, res) => {
   try {
     const count = await Surah.countDocuments();
-    const findSurah = await Surah.find({});
+    const findSurah = await Surah.find({}).select(
+      `name transliteration number translation revelation_type total_verses audio_one verses.audio_one verses.verses verses.text verses.ar.text`
+    );
     if (!findSurah) {
       res.status(404).json({ msg: "Surah not found!!" });
     } else {

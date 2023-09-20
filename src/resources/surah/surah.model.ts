@@ -60,7 +60,7 @@ const SurahSchema: Schema = new Schema(
           required: true,
         },
         verses: {
-          type: String,
+          type: Number,
           required: true,
         },
         english: {
