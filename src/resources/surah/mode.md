@@ -1,6 +1,6 @@
 ## Model creation and destruction functions for the database connection object created by the database connection object
 
-````ts
+```ts
 {
      "number": 1,
      "name": "ٱلْفَاتِحَةِ",
@@ -23,5 +23,5 @@
         }
        }
      ]
-   }```
-````
+   }
+```
