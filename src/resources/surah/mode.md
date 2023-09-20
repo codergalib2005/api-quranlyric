@@ -1,5 +1,17 @@
 ## Model creation and destruction functions for the database connection object created by the database connection object
 
+**You can use this url, if you just want to load this surah with all verses, with translation to english**
+
+```
+url/api/v1/surah
+```
+
+**If you want to load your verses translation by selected your native language you should use this url but as query you have to use your native language extension**
+
+```
+url/api/v1/surah?native=ar
+```
+
 ```ts
 {
      "number": 1,
