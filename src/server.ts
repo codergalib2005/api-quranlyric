@@ -25,5 +25,3 @@ app.use("/api/v1/doc", doc);
 app.use("/api/v1/surah", surah);
 
 export default app;
-
-// write a function that recieves 2 number an return a sum of them
