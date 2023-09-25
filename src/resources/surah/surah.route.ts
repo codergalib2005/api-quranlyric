@@ -1,8 +1,9 @@
 import express from "express";
-import { getAllSurah } from "./surah.controller";
+import { getAllSurah, createSurah } from "./surah.controller";
 
 const router = express.Router();
 
 router.get("/", getAllSurah);
+router.post("/", createSurah);
 
 export default router;

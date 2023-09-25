@@ -1,5 +1,34 @@
 import Surah from "./surah.model";
 
+const createSurah = async (req, res) => {
+  const {
+    name,
+    transliteration,
+    number,
+    translation,
+    revelation_type,
+    total_verses,
+    verses,
+  } = req.body;
+
+  try {
+    const surah = await Surah.create({
+      name,
+      transliteration,
+      number,
+      translation,
+      revelation_type,
+      total_verses,
+      verses,
+    });
+    if (!surah) {
+      res.status(404).json({ msg: "Surah not found!!" });
+    } else {
+      res.status(201).json({ message: "Surah Created", data: surah });
+    }
+  } catch (err) {}
+};
+
 const getAllSurah = async (req, res) => {
   const { native = "en" } = req.query || {};
   try {
@@ -17,4 +46,4 @@ const getAllSurah = async (req, res) => {
   }
 };
 
-export { getAllSurah };
+export { getAllSurah, createSurah };
