@@ -4,6 +4,7 @@ interface IUser extends Document {
   name: string;
   email: string;
   password: string;
+  magicLinkToken: string;
   language?: string;
   country?: string;
   avatar?: string;
@@ -29,6 +30,9 @@ const UserSchema: Schema = new Schema(
     password: {
       type: String,
       required: true,
+    },
+    magicLinkToken: {
+      type: String,
     },
     avatar: {
       type: String,
