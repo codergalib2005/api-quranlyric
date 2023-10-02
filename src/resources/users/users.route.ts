@@ -1,10 +1,13 @@
-import { register, login, googleLogin } from "./users.controller";
+import authMiddleware from "../../middlewares/authMiddleware";
+import { register, login, validation, updateUser } from "./users.controller";
 import express from "express";
 
 const router = express.Router();
 
 router.post("/register", register);
 router.post("/login", login);
-router.post("/google-login", googleLogin);
+// Protected route that requires authentication
+router.get("/protected-route", authMiddleware, validation);
+router.patch("/update-user", authMiddleware, updateUser);
 
 export default router;

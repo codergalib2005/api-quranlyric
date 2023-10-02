@@ -1,13 +1,9 @@
 import User from "./users.model";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import objectKeysToString from "../../utils/objectKeysToString";
 const uuid = require("uuid"); // You can use the 'uuid' library to generate unique tokens
 const nodemailer = require("nodemailer");
-
-// // Generate a unique token function
-// function generateUniqueToken() {
-//   return uuid.v4();
-// }
 
 export const register = async (req, res) => {
   const { name, email, password } = req.body;
@@ -61,22 +57,37 @@ export const login = async (req: Request, res: Response) => {
         expiresIn: "12d",
       }
     );
-    // Save the refresh token in the database
-    existingUser.refreshToken = token;
-    await existingUser.save();
-    // Send refresh & access token back to the user
-    res.status(200).json({
-      msg: "Login successful",
-      refreshToken: token,
-      accessToken: existingUser.refreshToken,
-    });
-    res.json({ message: "Magic link sent successfully" });
+    res.json({ message: "Magic link sent successfully", token });
   } catch (err) {
     console.log(err);
   }
 };
-export const googleLogin = async (req, res) => {
+
+export const validation = async (req: Request, res: Response) => {
+  const user = req.user;
   try {
+    // const user = await User.findById(req.user.id).select("-password");
+
+    res.json({ user });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const updateUser = async (req: Request, res: Response) => {
+  try {
+    const data = req.body;
+    if (!data) return res.status(400).json({ msg: "No data to update" });
+
+    // Convert the object keys to a string
+    const dataConvertedString = objectKeysToString(data);
+
+    // check if user exists and select the data to update
+    const updatedUser = await User.findByIdAndUpdate(req.user.id, data, {
+      new: true,
+      select: dataConvertedString, // Move the select method here
+    });
+    res.json({ updatedUser });
   } catch (err) {
     console.log(err);
   }
