@@ -1,12 +1,13 @@
 import User from "./users.model";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 const uuid = require("uuid"); // You can use the 'uuid' library to generate unique tokens
 const nodemailer = require("nodemailer");
 
-// Generate a unique token function
-function generateUniqueToken() {
-  return uuid.v4();
-}
+// // Generate a unique token function
+// function generateUniqueToken() {
+//   return uuid.v4();
+// }
 
 export const register = async (req, res) => {
   const { name, email, password } = req.body;
@@ -39,7 +40,6 @@ import { Request, Response } from "express";
 export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   // Generate a unique token (e.g., a UUID)
-  const token = generateUniqueToken();
   try {
     // Check if the user with the given email exists in the database
     const existingUser = await User.findOne({ email });
@@ -53,6 +53,14 @@ export const login = async (req: Request, res: Response) => {
     if (!isMatch) return res.status(400).json({ msg: "Invalid credentials" });
 
     // If the user exists, generate an access token and a refresh token
+    // generate token using email user id and secret
+    const token = jwt.sign(
+      { id: existingUser._id },
+      process.env.JWT_SECRET_QURANLYRIC,
+      {
+        expiresIn: "12d",
+      }
+    );
     // Save the refresh token in the database
     existingUser.refreshToken = token;
     await existingUser.save();
