@@ -55,7 +55,7 @@ export const login = async (req: Request, res: Response) => {
     // If the user exists, generate an access token and a refresh token
     // generate token using email user id and secret
     const token = jwt.sign(
-      { id: existingUser._id },
+      { id: existingUser._id, email: existingUser.email },
       process.env.JWT_SECRET_QURANLYRIC,
       {
         expiresIn: "12d",
