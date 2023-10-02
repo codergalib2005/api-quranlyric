@@ -8,6 +8,7 @@ const app = express();
 import sections from "./resources/section/section.route";
 import doc from "./resources/document/document.route";
 import surah from "./resources/surah/surah.route";
+import users from "./resources/users/users.route";
 
 // middlewares
 connectDB();
@@ -23,5 +24,6 @@ app.get("/", (req, res) => {
 app.use("/api/v1/sections", sections);
 app.use("/api/v1/doc", doc);
 app.use("/api/v1/surah", surah);
+app.use("/api/v1/users", users);
 
 export default app;
