@@ -3,36 +3,9 @@ import bcrypt from "bcrypt";
 const uuid = require("uuid"); // You can use the 'uuid' library to generate unique tokens
 const nodemailer = require("nodemailer");
 
-// Configure Nodemailer to send emails
-const transporter = nodemailer.createTransport({
-  service: "gmail", // e.g., 'Gmail' or use SMTP settings
-  auth: {
-    user: process.env.EMAIL,
-    pass: process.env.PASS,
-  },
-});
-
 // Generate a unique token function
 function generateUniqueToken() {
   return uuid.v4();
-}
-
-// Send magic link email function
-function sendMagicLinkEmail(email, token) {
-  const mailOptions = {
-    from: "coderboygalif@gmail.com",
-    to: email,
-    subject: "Quran Lyric Login",
-    text: `Click the following link to log in: https://docreader.me?token=${token}`,
-  };
-
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error("Error sending email:", error);
-    } else {
-      console.log("Email sent:", info.response);
-    }
-  });
 }
 
 export const register = async (req, res) => {
@@ -61,24 +34,34 @@ export const register = async (req, res) => {
     console.log(err);
   }
 };
-export const login = async (req, res) => {
+import { Request, Response } from "express";
+
+export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   // Generate a unique token (e.g., a UUID)
   const token = generateUniqueToken();
   try {
     // Check if the user with the given email exists in the database
     const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      // If the user already exists, update their magic link token
-      existingUser.magicLinkToken = token;
-      await existingUser.save();
-    } else {
-      // If the user doesn't exist, create a new user record
-      await User.create({ email, magicLinkToken: token });
+    // If the user doesn't exist, return a 400 error
+    if (!existingUser) {
+      return res.status(400).json({ msg: "Invalid credentials" });
     }
-    // Send an email containing the magic link to the user's email address
-    sendMagicLinkEmail(email, token);
+    // compare password
+    const isMatch = await bcrypt.compare(password, existingUser.password);
 
+    if (!isMatch) return res.status(400).json({ msg: "Invalid credentials" });
+
+    // If the user exists, generate an access token and a refresh token
+    // Save the refresh token in the database
+    existingUser.refreshToken = token;
+    await existingUser.save();
+    // Send refresh & access token back to the user
+    res.status(200).json({
+      msg: "Login successful",
+      refreshToken: token,
+      accessToken: existingUser.refreshToken,
+    });
     res.json({ message: "Magic link sent successfully" });
   } catch (err) {
     console.log(err);
