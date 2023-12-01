@@ -4,7 +4,7 @@
 // tags: string[];
 
 import counter from "../../utils/counter";
-import slug from "../../utils/slug";
+// import slug from "../../utils/slug";
 import Doc from "./document.model";
 
 export const createDoc = async (req, res) => {
@@ -16,21 +16,20 @@ export const createDoc = async (req, res) => {
       meta_title,
       meta_description,
       meta_keywords,
-      order,
+      slug,
     } = req.body;
 
-    const count = await Doc.countDocuments();
+    // const count = await Doc.countDocuments();
 
-    const makeSlug = `${counter(count + 1)}-${slug(name)}`;
+    // const makeSlug = `${counter(count + 1)}-${slug(name)}`;
     const newDoc = new Doc({
       name,
       content,
       topic,
-      slug: makeSlug,
+      slug,
       meta_title,
       meta_description,
       meta_keywords,
-      order,
     });
     const saveDoc = await newDoc.save();
     res.status(201).json({ message: "Document Added success", data: saveDoc });
