@@ -4,11 +4,12 @@ content-type: application/json
 
 {
      "title": "My first post",
-     "body": "This is my first post  and I will be posting it to the website at http://localhost and I will be posting it to the website at http://localhost and I will be posting it to the website at http://localhost and I will",    
+     "body": "This is my first post  and I will be posting it to the website at http://localhost and I will be posting it to the website at http://localhost and I will be posting it to the website at http://localhost and I will",
+     "tags": ["arabic", "bangla", "dynamic"]
 }
 
-### get all posts
-GET http://localhost:5000/api/v1/posts
+### get Posts by tags
+GET http://localhost:5000/api/v1/posts/tags?tags=bangla
 
 ### get a single post by ID
-GET http://localhost:5000/api/v1/posts/id/11212
+GET http://localhost:5000/api/v1/posts/id/656a52a3b19f7fc0191c9811
