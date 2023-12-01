@@ -7,3 +7,12 @@ export const createPost = async (req, res) => {
     });
   }
 };
+export const getAllPost = async (req, res) => {
+  res.send([]);
+};
+export const getPostById = async (req, res) => {
+  res.send({ content: "single post by id" });
+};
+export const getPostBySlug = async (req, res) => {
+  res.send({ content: "single post by slug" });
+};

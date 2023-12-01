@@ -1,4 +1,4 @@
-# Create a new Post
+### Create a new Post
 POST http://localhost:5000/api/v1/posts
 content-type: application/json
 
@@ -6,4 +6,11 @@ content-type: application/json
     "content": "hello world it's galib here"
 }
 
-// get all posts
+### get all posts
+GET http://localhost:5000/api/v1/posts
+
+### get a single post by ID
+GET http://localhost:5000/api/v1/posts/id/11212
+
+### get a single post By Slug
+GET http://localhost:5000/api/v1/posts/slug/the-post-name-is
