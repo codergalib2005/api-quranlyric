@@ -1,0 +1,9 @@
+# Create a new Post
+POST http://localhost:5000/api/v1/posts
+content-type: application/json
+
+{
+    "content": "hello world it's galib here"
+}
+
+// get all posts
