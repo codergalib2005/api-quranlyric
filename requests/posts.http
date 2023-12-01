@@ -3,7 +3,8 @@ POST http://localhost:5000/api/v1/posts
 content-type: application/json
 
 {
-    "content": "hello world it's galib here"
+     "title": "My first post",
+     "body": "This is my first post  and I will be posting it to the website at http://localhost and I will be posting it to the website at http://localhost and I will be posting it to the website at http://localhost and I will",    
 }
 
 ### get all posts
@@ -11,6 +12,3 @@ GET http://localhost:5000/api/v1/posts
 
 ### get a single post by ID
 GET http://localhost:5000/api/v1/posts/id/11212
-
-### get a single post By Slug
-GET http://localhost:5000/api/v1/posts/slug/the-post-name-is

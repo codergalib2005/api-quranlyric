@@ -3,8 +3,8 @@ export default function slug(str: string): string {
   str = str.toLowerCase();
 
   // remove accents, swap ñ for n, etc
-  let from : string = "ãàáäâẽèéëêìíïîõòóöôùúüûñç·/_,:;";
-  let to : string = "aaaaaeeeeeiiiiooooouuuunc------";
+  let from: string = "ãàáäâẽèéëêìíïîõòóöôùúüûñç·/_,:;";
+  let to: string = "aaaaaeeeeeiiiiooooouuuunc------";
   for (let i = 0, l = from.length; i < l; i++) {
     str = str.replace(new RegExp(from.charAt(i), "g"), to.charAt(i));
   }

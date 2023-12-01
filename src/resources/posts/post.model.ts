@@ -2,8 +2,8 @@ import mongoose, { Document, Schema } from "mongoose";
 
 interface IPost extends Document {
   title: string;
-  slug: string;
-  description: string;
+  tags: string[];
+  body: string;
   image?: string;
   video?: string;
   videoThumbnail?: string;
@@ -17,11 +17,11 @@ const PostSchema: Schema = new Schema(
       type: String,
       required: true,
     },
-    slug: {
-      type: String,
+    tags: {
+      type: [String],
       required: true,
     },
-    description: {
+    body: {
       type: String,
       required: true,
     },
